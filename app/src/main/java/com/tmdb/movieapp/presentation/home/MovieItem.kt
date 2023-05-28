@@ -19,6 +19,7 @@ import com.tmdb.movieapp.R
 import com.tmdb.movieapp.domain.SimplifiedMovie
 import com.tmdb.movieapp.domain.formatToUSD
 import com.tmdb.movieapp.presentation.MoviePoster
+import com.tmdb.movieapp.presentation.PartiallyBoldStringBuilder
 
 @Composable
 fun MovieItem(
@@ -27,13 +28,22 @@ fun MovieItem(
     onMovieItemClick: (Int) -> Unit
 ) {
     val budgetText = if (simplifiedMovie.budget == 0) {
-        stringResource(id = R.string.txtMovieBudget) + " " + stringResource(id = R.string.txtUnknown)
+        PartiallyBoldStringBuilder.buildPartiallyBoldString(
+            boldPart = stringResource(id = R.string.txtMovieBudget),
+            normalPart = stringResource(id = R.string.txtUnknown)
+        )
     } else {
-        stringResource(id = R.string.txtMovieBudget) + " ${simplifiedMovie.budget.formatToUSD()}"
+        PartiallyBoldStringBuilder.buildPartiallyBoldString(
+            boldPart = stringResource(id = R.string.txtMovieBudget),
+            normalPart = simplifiedMovie.budget.formatToUSD()
+        )
     }
 
-    val overviewText = stringResource(id = R.string.txtMovieOverview) + " " +
-            simplifiedMovie.overview.ifEmpty { stringResource(id = R.string.txtUnknown) }
+    val overviewText = PartiallyBoldStringBuilder.buildPartiallyBoldString(
+        boldPart = stringResource(id = R.string.txtMovieOverview),
+        normalPart = simplifiedMovie.overview.ifEmpty { stringResource(id = R.string.txtUnknown) }
+    )
+
 
     Card(
         modifier = modifier.clickable {
@@ -41,16 +51,21 @@ fun MovieItem(
         },
         shape = RoundedCornerShape(16.dp)
     ) {
-        Row(modifier = Modifier
-            .fillMaxSize()
-            .background(color = Color.DarkGray)) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = Color.DarkGray)
+        ) {
             Column(modifier = Modifier.weight(1f)) {
                 MoviePoster(imageUrl = simplifiedMovie.poster_path)
             }
             Column(modifier = Modifier.weight(2f)) {
                 Text(
                     modifier = Modifier.padding(all = 8.dp),
-                    text = stringResource(id = R.string.txtMovieTitle) + simplifiedMovie.name,
+                    text = PartiallyBoldStringBuilder.buildPartiallyBoldString(
+                        boldPart = stringResource(id = R.string.txtMovieTitle),
+                        normalPart = " ${simplifiedMovie.name}"
+                    ),
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 2
                 )

@@ -22,22 +22,31 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.tmdb.movieapp.R
 import com.tmdb.movieapp.domain.formatToUSD
 import com.tmdb.movieapp.presentation.MoviePoster
+import com.tmdb.movieapp.presentation.PartiallyBoldStringBuilder
 
 @Composable
 fun DetailsScreen(
     detailsViewModel: DetailsViewModel = hiltViewModel(),
-    movieId: Int
+    @Suppress("UNUSED_PARAMETER") movieId: Int
 ) {
-    val movie by detailsViewModel.movie.collectAsState()
+    val detailedMovie by detailsViewModel.movie.collectAsState()
 
-    val budgetText = if (movie.budget == 0) {
-        stringResource(id = R.string.txtMovieBudget) + " " + stringResource(id = R.string.txtUnknown)
+    val budgetText = if (detailedMovie.budget == 0) {
+        PartiallyBoldStringBuilder.buildPartiallyBoldString(
+            boldPart = stringResource(id = R.string.txtMovieBudget),
+            normalPart = stringResource(id = R.string.txtUnknown)
+        )
     } else {
-        stringResource(id = R.string.txtMovieBudget) + " ${movie.budget.formatToUSD()}"
+        PartiallyBoldStringBuilder.buildPartiallyBoldString(
+            boldPart = stringResource(id = R.string.txtMovieBudget),
+            normalPart = detailedMovie.budget.formatToUSD()
+        )
     }
 
-    val overviewText = stringResource(id = R.string.txtMovieOverview) + " " +
-            movie.overview.ifEmpty { stringResource(id = R.string.txtUnknown) }
+    val overviewText = PartiallyBoldStringBuilder.buildPartiallyBoldString(
+        boldPart = stringResource(id = R.string.txtMovieOverview),
+        normalPart = detailedMovie.overview.ifEmpty { stringResource(id = R.string.txtUnknown) }
+    )
 
     Column(
         modifier = Modifier
@@ -51,27 +60,43 @@ fun DetailsScreen(
                 .fillMaxWidth()
                 .fillMaxHeight(0.5f)
                 .padding(bottom = 8.dp),
-            imageUrl = movie.posterURL
+            imageUrl = detailedMovie.posterURL
         )
-        Row {
-            Text(text = stringResource(R.string.txtMovieTagline) + movie.tagline)
+        if (detailedMovie.tagline.isNotEmpty()) {
+            Row {
+                Text(
+                    text = PartiallyBoldStringBuilder.buildPartiallyBoldString(
+                        boldPart = stringResource(R.string.txtMovieTagline),
+                        normalPart = detailedMovie.tagline
+                    )
+                )
+            }
+            Spacer(modifier = Modifier.height(8.dp))
         }
-        Spacer(modifier = Modifier.height(8.dp))
         Row {
             Text(
-                text = stringResource(R.string.txtMovieTitle) + movie.originalTitle
+                text = PartiallyBoldStringBuilder.buildPartiallyBoldString(
+                    boldPart = stringResource(R.string.txtMovieTitle),
+                    normalPart = detailedMovie.originalTitle
+                )
             )
         }
         Spacer(modifier = Modifier.height(8.dp))
         Row {
             Text(
-                text = stringResource(R.string.txtMovieLanguage) + movie.originalLanguage
+                text = PartiallyBoldStringBuilder.buildPartiallyBoldString(
+                    boldPart = stringResource(R.string.txtMovieLanguage),
+                    normalPart = detailedMovie.originalLanguage
+                )
             )
         }
         Spacer(modifier = Modifier.height(8.dp))
         Row {
             Text(
-                text = stringResource(R.string.txtMovieReleaseDate) + movie.releaseDate
+                text = PartiallyBoldStringBuilder.buildPartiallyBoldString(
+                    boldPart = stringResource(R.string.txtMovieReleaseDate),
+                    normalPart = detailedMovie.releaseDate
+                )
             )
         }
         Spacer(modifier = Modifier.height(8.dp))
@@ -84,7 +109,12 @@ fun DetailsScreen(
         }
         Spacer(modifier = Modifier.height(8.dp))
         Row {
-            Text(text = stringResource(R.string.txtMovieRevenue) + " " + movie.revenue.formatToUSD())
+            Text(
+                text = PartiallyBoldStringBuilder.buildPartiallyBoldString(
+                    boldPart = stringResource(R.string.txtMovieRevenue),
+                    normalPart = detailedMovie.revenue.formatToUSD()
+                )
+            )
         }
         Spacer(modifier = Modifier.height(8.dp))
     }
