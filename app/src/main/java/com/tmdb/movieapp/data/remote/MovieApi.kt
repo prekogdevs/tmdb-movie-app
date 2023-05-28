@@ -1,7 +1,7 @@
 package com.tmdb.movieapp.data.remote
 
-import com.tmdb.movieapp.data.local.MovieDetailsResponse
-import com.tmdb.movieapp.data.local.MovieListResponse
+import com.tmdb.movieapp.data.remote.response.MovieDetailsResponse
+import com.tmdb.movieapp.data.remote.response.MovieListResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

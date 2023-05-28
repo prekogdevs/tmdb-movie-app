@@ -1,4 +1,4 @@
-package com.tmdb.movieapp.data
+package com.tmdb.movieapp.domain
 
 data class SimplifiedMovie(
     val id: Int,

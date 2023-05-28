@@ -1,9 +1,9 @@
 package com.tmdb.movieapp.data.repository
 
-import com.tmdb.movieapp.data.local.MovieDetailsResponse
-import com.tmdb.movieapp.data.local.MovieListResponse
+import com.tmdb.movieapp.data.remote.response.MovieDetailsResponse
+import com.tmdb.movieapp.data.remote.response.MovieListResponse
 import com.tmdb.movieapp.data.remote.MovieApi
-import com.tmdb.movieapp.domain.MovieRepository
+import com.tmdb.movieapp.domain.repository.MovieRepository
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(

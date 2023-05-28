@@ -3,7 +3,7 @@ package com.tmdb.movieapp.di
 import com.tmdb.movieapp.AppConstants
 import com.tmdb.movieapp.data.remote.MovieApi
 import com.tmdb.movieapp.data.repository.MovieRepositoryImpl
-import com.tmdb.movieapp.domain.MovieRepository
+import com.tmdb.movieapp.domain.repository.MovieRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

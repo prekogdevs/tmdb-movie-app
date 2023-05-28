@@ -2,8 +2,8 @@ package com.tmdb.movieapp.data
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.tmdb.movieapp.data.local.MovieSearchResult
-import com.tmdb.movieapp.domain.MovieRepository
+import com.tmdb.movieapp.data.remote.response.MovieSearchResult
+import com.tmdb.movieapp.domain.repository.MovieRepository
 import javax.inject.Inject
 
 class MovieDataSource @Inject constructor(

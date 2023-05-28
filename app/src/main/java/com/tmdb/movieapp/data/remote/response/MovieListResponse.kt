@@ -1,4 +1,4 @@
-package com.tmdb.movieapp.data.local
+package com.tmdb.movieapp.data.remote.response
 
 data class MovieListResponse(
     val page: Int,

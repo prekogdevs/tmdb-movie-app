@@ -14,7 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.tmdb.movieapp.R
-import com.tmdb.movieapp.data.SimplifiedMovie
+import com.tmdb.movieapp.domain.SimplifiedMovie
 import com.tmdb.movieapp.presentation.MoviePoster
 
 @Composable

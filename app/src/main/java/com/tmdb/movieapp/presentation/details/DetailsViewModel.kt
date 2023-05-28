@@ -3,9 +3,9 @@ package com.tmdb.movieapp.presentation.details
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tmdb.movieapp.data.DetailedMovie
+import com.tmdb.movieapp.domain.DetailedMovie
 import com.tmdb.movieapp.data.remote.mapper.toDetailedMovie
-import com.tmdb.movieapp.domain.MovieRepository
+import com.tmdb.movieapp.domain.repository.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

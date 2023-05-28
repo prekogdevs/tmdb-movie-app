@@ -1,8 +1,8 @@
-package com.tmdb.movieapp.domain
+package com.tmdb.movieapp.domain.repository
 
 import com.tmdb.movieapp.AppConstants
-import com.tmdb.movieapp.data.local.MovieDetailsResponse
-import com.tmdb.movieapp.data.local.MovieListResponse
+import com.tmdb.movieapp.data.remote.response.MovieDetailsResponse
+import com.tmdb.movieapp.data.remote.response.MovieListResponse
 
 interface MovieRepository {
     suspend fun getMovies(
