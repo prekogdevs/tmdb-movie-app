@@ -26,6 +26,7 @@ fun DetailsScreen(
     movieId: Int
 ) {
     val movie by detailsViewModel.movie.collectAsState()
+    // TODO: Make it scrollable
     Column(
         modifier = Modifier
             .fillMaxSize()

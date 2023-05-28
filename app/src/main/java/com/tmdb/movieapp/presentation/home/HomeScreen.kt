@@ -18,7 +18,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.tmdb.movieapp.R
-import com.tmdb.movieapp.data.remote.mapper.toSimplifiedMovie
 
 @Composable
 fun HomeScreen(
@@ -57,7 +56,7 @@ fun HomeScreen(
         } else {
             LazyColumn {
                 items(movies.itemCount) { index ->
-                    val movie = movies[index]?.toSimplifiedMovie()
+                    val movie = movies[index]
                     movie?.let {
                         MovieItem(
                             simplifiedMovie = movie,

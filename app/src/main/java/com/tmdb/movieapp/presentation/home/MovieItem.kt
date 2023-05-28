@@ -22,6 +22,7 @@ fun MovieItem(
     simplifiedMovie: SimplifiedMovie,
     onMovieItemClick: (Int) -> Unit
 ) {
+    // TODO: Add border
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -45,12 +46,14 @@ fun MovieItem(
                     maxLines = 2
                 )
                 Text(
+                    // TODO: Format budget
                     modifier = Modifier.padding(16.dp),
-                    text = stringResource(id = R.string.txtMovieBudget) + simplifiedMovie.budget,
+                    text = stringResource(id = R.string.txtMovieBudget) + simplifiedMovie.budget + "$",
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1
                 )
                 Text(
+                    // TODO: If empty then append "Unknown"
                     modifier = Modifier.padding(16.dp),
                     text = stringResource(id = R.string.txtMovieOverview) + simplifiedMovie.overview,
                     overflow = TextOverflow.Ellipsis,

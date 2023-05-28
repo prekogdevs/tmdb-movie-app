@@ -19,6 +19,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val movieRepository: MovieRepository
 ) : ViewModel() {
+    private val queryDelay = 500L // 500ms
     private val _query = MutableStateFlow("")
     val query = _query.asStateFlow()
 
@@ -29,10 +30,12 @@ class HomeViewModel @Inject constructor(
             }
             return field
         }
+
+    // TODO: Add isLoading to be able to show a CircularProgressIndicator on the HomeScreen
     val moviePager = Pager(
         config = PagingConfig(pageSize = 10),
         pagingSourceFactory = { movieDataSource!! }
-    ).flow.debounce(500).cachedIn(viewModelScope)
+    ).flow.debounce(queryDelay).cachedIn(viewModelScope)
 
     fun onQueryChanged(query: String) {
         _query.value = query
