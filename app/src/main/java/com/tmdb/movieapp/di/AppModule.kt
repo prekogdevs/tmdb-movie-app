@@ -2,6 +2,8 @@ package com.tmdb.movieapp.di
 
 import com.tmdb.movieapp.AppConstants
 import com.tmdb.movieapp.data.remote.MovieApi
+import com.tmdb.movieapp.data.repository.MovieRepositoryImpl
+import com.tmdb.movieapp.domain.MovieRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,4 +39,9 @@ object AppModule {
             )
             .build()
     }
+
+    @Singleton
+    @Provides
+    fun provideMovieRepository(api: MovieApi) =
+        MovieRepositoryImpl(api = api) as MovieRepository
 }

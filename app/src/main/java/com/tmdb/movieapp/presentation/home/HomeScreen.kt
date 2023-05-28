@@ -12,6 +12,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.compose.collectAsLazyPagingItems
+import com.tmdb.movieapp.data.remote.mapper.toSimplifiedMovie
 
 @Composable
 fun HomeScreen(
@@ -19,6 +21,7 @@ fun HomeScreen(
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
     val query by homeViewModel.query.collectAsState()
+    val movies = homeViewModel.moviePager.collectAsLazyPagingItems()
 
     Column(
         modifier = Modifier
@@ -38,8 +41,11 @@ fun HomeScreen(
             }
         )
         LazyColumn {
-            items(10) {
-                MovieItem()
+            items(movies.itemCount) { index ->
+                val movie = movies[index]?.toSimplifiedMovie()
+                movie?.let {
+                    MovieItem(simplifiedMovie = movie)
+                }
             }
         }
     }
