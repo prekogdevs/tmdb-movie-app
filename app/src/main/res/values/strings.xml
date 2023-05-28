@@ -14,4 +14,5 @@
     <string name="txtSearchQueryPlaceholder">Enter your search query here</string>
     <string name="txtMovieDatabase">The Movie Database</string>
     <string name="txtMovieDetails">Movie Details</string>
+    <string name="txtUnknown">Unknown</string>
 </resources>

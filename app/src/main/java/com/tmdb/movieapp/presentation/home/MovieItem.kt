@@ -1,61 +1,68 @@
 package com.tmdb.movieapp.presentation.home
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.tmdb.movieapp.R
 import com.tmdb.movieapp.domain.SimplifiedMovie
+import com.tmdb.movieapp.domain.formatToUSD
 import com.tmdb.movieapp.presentation.MoviePoster
 
 @Composable
 fun MovieItem(
+    modifier: Modifier = Modifier,
     simplifiedMovie: SimplifiedMovie,
     onMovieItemClick: (Int) -> Unit
 ) {
-    // TODO: Add border
+    val budgetText = if (simplifiedMovie.budget == 0) {
+        stringResource(id = R.string.txtMovieBudget) + " " + stringResource(id = R.string.txtUnknown)
+    } else {
+        stringResource(id = R.string.txtMovieBudget) + " ${simplifiedMovie.budget.formatToUSD()}"
+    }
+
+    val overviewText = stringResource(id = R.string.txtMovieOverview) + " " +
+            simplifiedMovie.overview.ifEmpty { stringResource(id = R.string.txtUnknown) }
+
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(all = 8.dp)
-            .clickable {
-                onMovieItemClick(simplifiedMovie.id)
-            }
+        modifier = modifier.clickable {
+            onMovieItemClick(simplifiedMovie.id)
+        },
+        shape = RoundedCornerShape(16.dp)
     ) {
-        Row(modifier = Modifier.fillMaxSize()) {
+        Row(modifier = Modifier
+            .fillMaxSize()
+            .background(color = Color.DarkGray)) {
             Column(modifier = Modifier.weight(1f)) {
-                MoviePoster(
-                    modifier = Modifier.fillMaxSize(),
-                    imageUrl = simplifiedMovie.poster_path
-                )
+                MoviePoster(imageUrl = simplifiedMovie.poster_path)
             }
             Column(modifier = Modifier.weight(2f)) {
                 Text(
-                    modifier = Modifier.padding(16.dp),
+                    modifier = Modifier.padding(all = 8.dp),
                     text = stringResource(id = R.string.txtMovieTitle) + simplifiedMovie.name,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 2
                 )
                 Text(
-                    // TODO: Format budget
-                    modifier = Modifier.padding(16.dp),
-                    text = stringResource(id = R.string.txtMovieBudget) + simplifiedMovie.budget + "$",
+                    modifier = Modifier.padding(all = 8.dp),
+                    text = budgetText,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1
                 )
                 Text(
-                    // TODO: If empty then append "Unknown"
-                    modifier = Modifier.padding(16.dp),
-                    text = stringResource(id = R.string.txtMovieOverview) + simplifiedMovie.overview,
+                    modifier = Modifier.padding(horizontal = 8.dp),
+                    text = overviewText,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 3
                 )

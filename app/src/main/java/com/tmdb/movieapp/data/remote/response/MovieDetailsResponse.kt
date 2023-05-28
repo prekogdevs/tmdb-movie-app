@@ -6,7 +6,7 @@ data class MovieDetailsResponse(
     val original_language: String,
     val release_date: String,
     val budget: Int,
-    val revenue: Long = 0,
+    val revenue: Int = 0,
     val tagline: String = "",
     val overview: String,
     val poster_path: String?

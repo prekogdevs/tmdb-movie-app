@@ -2,6 +2,7 @@ package com.tmdb.movieapp.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -21,6 +22,7 @@ fun MoviePoster(
             .crossfade(true)
             .build(),
         placeholder = painterResource(R.drawable.movie_without_poster),
-        contentDescription = stringResource(R.string.txtMoviePoster)
+        contentDescription = stringResource(R.string.txtMoviePoster),
+        contentScale = ContentScale.Crop
     )
 }

@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -18,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.tmdb.movieapp.R
+import com.tmdb.movieapp.ui.theme.primaryColor
 
 @Composable
 fun HomeScreen(
@@ -26,6 +29,7 @@ fun HomeScreen(
     onMovieItemClick: (Int) -> Unit
 ) {
     val query by homeViewModel.query.collectAsState()
+    val isSearching by homeViewModel.isSearching.collectAsState()
     val movies = homeViewModel.moviePager.collectAsLazyPagingItems()
 
     Column(
@@ -36,16 +40,23 @@ fun HomeScreen(
                 bottom = paddingValues.calculateBottomPadding()
             )
     ) {
+        Divider(color = primaryColor, thickness = 1.dp)
         SearchField(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(all = 8.dp),
+            modifier = Modifier.fillMaxWidth(),
             value = query,
             onValueChange = { query ->
                 homeViewModel.onQueryChanged(query = query)
             }
         )
-        if (movies.itemCount == 0) {
+        if (isSearching) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                CircularProgressIndicator()
+            }
+        } else if (movies.itemCount == 0) {
             Column(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -54,11 +65,15 @@ fun HomeScreen(
                 Text(text = stringResource(R.string.txtSearchResultsLabel))
             }
         } else {
-            LazyColumn {
+            LazyColumn(
+                verticalArrangement = Arrangement.spacedBy(24.dp),
+                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+            ) {
                 items(movies.itemCount) { index ->
                     val movie = movies[index]
                     movie?.let {
                         MovieItem(
+                            modifier = Modifier.fillMaxWidth(),
                             simplifiedMovie = movie,
                             onMovieItemClick = {
                                 onMovieItemClick(movie.id)

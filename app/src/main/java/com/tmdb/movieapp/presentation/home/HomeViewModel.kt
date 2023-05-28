@@ -12,6 +12,8 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @OptIn(FlowPreview::class)
@@ -23,6 +25,9 @@ class HomeViewModel @Inject constructor(
     private val _query = MutableStateFlow("")
     val query = _query.asStateFlow()
 
+    private val _isSearching = MutableStateFlow(false)
+    val isSearching = _isSearching.asStateFlow()
+
     private var movieDataSource: MovieDataSource? = null
         get() {
             if (field == null || field?.invalid == true) {
@@ -31,14 +36,14 @@ class HomeViewModel @Inject constructor(
             return field
         }
 
-    // TODO: Add isLoading to be able to show a CircularProgressIndicator on the HomeScreen
     val moviePager = Pager(
         config = PagingConfig(pageSize = 10),
         pagingSourceFactory = { movieDataSource!! }
-    ).flow.debounce(queryDelay).cachedIn(viewModelScope)
+    ).flow.debounce(queryDelay).onEach { _isSearching.update { false } }.cachedIn(viewModelScope)
 
     fun onQueryChanged(query: String) {
         _query.value = query
+        _isSearching.value = true
         movieDataSource?.invalidate()
     }
 }

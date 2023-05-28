@@ -6,7 +6,7 @@ data class DetailedMovie(
     val originalLanguage: String = "",
     val releaseDate: String = "",
     val budget: Int = -1,
-    val revenue: Long = -1,
+    val revenue: Int = -1,
     val tagline: String = "",
     val overview: String = "",
     val posterURL: String? = null
