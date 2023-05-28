@@ -10,4 +10,6 @@
     <string name="txtMovieOverview">Overview: </string>
     <string name="txtMovieBudget">Budget: </string>
     <string name="txtMovieRevenue">Revenue: </string>
+    <string name="txtSearchResultsLabel">Your search results will appear here</string>
+    <string name="txtSearchQueryPlaceholder">Enter your search query here</string>
 </resources>

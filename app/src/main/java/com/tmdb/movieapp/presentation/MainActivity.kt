@@ -18,7 +18,7 @@ class MainActivity : ComponentActivity() {
             TMDBMovieAppTheme(darkTheme = false) {
                 Scaffold(
                     topBar = {
-                        // TODO: Add topBar
+                        // TODO:  Add topBar
                     },
                     content = { paddingValues ->
                         Navigation(paddingValues = paddingValues)
