@@ -3,7 +3,11 @@
     <string name="txtSearch">Search</string>
     <string name="txtMoviePoster">Poster</string>
     <string name="txtClearQuery">Clear query</string>
+    <string name="txtMovieTagline">Tagline: </string>
     <string name="txtMovieTitle">Original Title: </string>
+    <string name="txtMovieLanguage">Original Language: </string>
+    <string name="txtMovieReleaseDate">Release date: </string>
     <string name="txtMovieOverview">Overview: </string>
     <string name="txtMovieBudget">Budget: </string>
+    <string name="txtMovieRevenue">Revenue: </string>
 </resources>

@@ -18,7 +18,8 @@ import com.tmdb.movieapp.data.remote.mapper.toSimplifiedMovie
 @Composable
 fun HomeScreen(
     paddingValues: PaddingValues,
-    homeViewModel: HomeViewModel = hiltViewModel()
+    homeViewModel: HomeViewModel = hiltViewModel(),
+    onMovieItemClick: () -> Unit
 ) {
     val query by homeViewModel.query.collectAsState()
     val movies = homeViewModel.moviePager.collectAsLazyPagingItems()
@@ -44,7 +45,12 @@ fun HomeScreen(
             items(movies.itemCount) { index ->
                 val movie = movies[index]?.toSimplifiedMovie()
                 movie?.let {
-                    MovieItem(simplifiedMovie = movie)
+                    MovieItem(
+                        simplifiedMovie = movie,
+                        onMovieItemClick = {
+                            onMovieItemClick()
+                        }
+                    )
                 }
             }
         }

@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import com.tmdb.movieapp.presentation.home.HomeScreen
+import com.tmdb.movieapp.presentation.navigation.Navigation
 import com.tmdb.movieapp.ui.theme.TMDBMovieAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,8 +17,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             TMDBMovieAppTheme(darkTheme = false) {
                 Scaffold(
+                    topBar = {
+                        // TODO: Add topBar
+                    },
                     content = { paddingValues ->
-                        HomeScreen(paddingValues = paddingValues)
+                        Navigation(paddingValues = paddingValues)
                     }
                 )
             }
