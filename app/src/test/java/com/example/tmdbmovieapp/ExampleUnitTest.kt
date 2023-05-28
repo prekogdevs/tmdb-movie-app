@@ -1,4 +1,4 @@
-package com.example.tmdbmovieapp
+package com.tmb.tmdbmovieapp
 
 import org.junit.Test
 

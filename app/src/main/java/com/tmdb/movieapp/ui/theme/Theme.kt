@@ -1,4 +1,4 @@
-package com.example.tmdbmovieapp.ui.theme
+package com.tmdb.movieapp.ui.theme
 
 import android.app.Activity
 import android.os.Build
