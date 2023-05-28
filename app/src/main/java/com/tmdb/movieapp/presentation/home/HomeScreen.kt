@@ -7,11 +7,19 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
-fun HomeScreen(paddingValues: PaddingValues) {
+fun HomeScreen(
+    paddingValues: PaddingValues,
+    homeViewModel: HomeViewModel = hiltViewModel()
+) {
+    val query by homeViewModel.query.collectAsState()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -24,9 +32,9 @@ fun HomeScreen(paddingValues: PaddingValues) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(all = 8.dp),
-            value = "", // TODO: query
+            value = query,
             onValueChange = { query ->
-                // TODO: Movie item click
+                homeViewModel.onQueryChanged(query = query)
             }
         )
         LazyColumn {
