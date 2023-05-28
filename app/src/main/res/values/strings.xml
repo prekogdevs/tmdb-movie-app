@@ -12,4 +12,7 @@
     <string name="txtMovieRevenue">Revenue: </string>
     <string name="txtSearchResultsLabel">Your search results will appear here</string>
     <string name="txtSearchQueryPlaceholder">Enter your search query here</string>
+    <string name="txtMovieDatabase">The Movie Database</string>
+    <string name="txtMovieDetails">Movie Details</string>
+    <string name="txtHomeScreenTopBar">Home Screen Top Bar</string>
 </resources>
