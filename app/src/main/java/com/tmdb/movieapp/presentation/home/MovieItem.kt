@@ -20,14 +20,14 @@ import com.tmdb.movieapp.presentation.MoviePoster
 @Composable
 fun MovieItem(
     simplifiedMovie: SimplifiedMovie,
-    onMovieItemClick: () -> Unit
+    onMovieItemClick: (Int) -> Unit
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(all = 8.dp)
             .clickable {
-                onMovieItemClick()
+                onMovieItemClick(simplifiedMovie.id)
             }
     ) {
         Row(modifier = Modifier.fillMaxSize()) {

@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -19,10 +21,11 @@ import com.tmdb.movieapp.R
 import com.tmdb.movieapp.presentation.MoviePoster
 
 @Composable
-// TODO: Add contentDescription
 fun DetailsScreen(
-    detailsViewModel: DetailsViewModel = hiltViewModel()
+    detailsViewModel: DetailsViewModel = hiltViewModel(),
+    movieId: Int
 ) {
+    val movie by detailsViewModel.movie.collectAsState()
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -34,38 +37,46 @@ fun DetailsScreen(
                 .fillMaxWidth()
                 .fillMaxHeight(0.5f)
                 .padding(bottom = 8.dp),
-            imageUrl = null // TODO
+            imageUrl = movie.posterURL
         )
         Row {
-            Text(text = stringResource(R.string.txtMovieTagline))
-        }
-        Spacer(modifier = Modifier.height(8.dp))
-        Row {
-            Text(text = stringResource(R.string.txtMovieTitle))
-        }
-        Spacer(modifier = Modifier.height(8.dp))
-        Row {
-            Text(text = stringResource(R.string.txtMovieLanguage))
-        }
-        Spacer(modifier = Modifier.height(8.dp))
-        Row {
-            Text(text = stringResource(R.string.txtMovieReleaseDate))
+            Text(text = stringResource(R.string.txtMovieTagline) + movie.tagline)
         }
         Spacer(modifier = Modifier.height(8.dp))
         Row {
             Text(
-                text = stringResource(R.string.txtMovieOverview)
+                text = stringResource(R.string.txtMovieTitle) + movie.originalTitle
             )
         }
         Spacer(modifier = Modifier.height(8.dp))
         Row {
             Text(
-                text = stringResource(R.string.txtMovieBudget)
+                text = stringResource(R.string.txtMovieLanguage) + movie.originalLanguage
             )
         }
         Spacer(modifier = Modifier.height(8.dp))
         Row {
-            Text(text = stringResource(R.string.txtMovieRevenue))
+            Text(
+                text = stringResource(R.string.txtMovieReleaseDate) + movie.releaseDate
+            )
+        }
+        Spacer(modifier = Modifier.height(8.dp))
+        Row {
+            Text(
+                text = stringResource(R.string.txtMovieOverview) + movie.overview
+            )
+        }
+        Spacer(modifier = Modifier.height(8.dp))
+        Row {
+            Text(
+                text = stringResource(R.string.txtMovieBudget) + movie.budget + " $"
+            )
+        }
+        Spacer(modifier = Modifier.height(8.dp))
+        Row {
+            Text(
+                text = stringResource(R.string.txtMovieRevenue) + movie.revenue + " $"
+            )
         }
         Spacer(modifier = Modifier.height(8.dp))
     }

@@ -9,7 +9,6 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.tmdb.movieapp.R
 
-// TODO: Placeholder, No image
 @Composable
 fun MoviePoster(
     modifier: Modifier = Modifier,
@@ -18,10 +17,10 @@ fun MoviePoster(
     AsyncImage(
         modifier = modifier,
         model = ImageRequest.Builder(LocalContext.current)
-            .data(imageUrl ?: R.drawable.ic_launcher_background)
+            .data(imageUrl ?: R.drawable.movie_without_poster)
             .crossfade(true)
             .build(),
-        placeholder = painterResource(R.drawable.ic_launcher_background),
+        placeholder = painterResource(R.drawable.movie_without_poster),
         contentDescription = stringResource(R.string.txtMoviePoster)
     )
 }

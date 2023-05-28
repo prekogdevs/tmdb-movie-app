@@ -1,5 +1,6 @@
 package com.tmdb.movieapp.data.repository
 
+import com.tmdb.movieapp.data.local.MovieDetailsResponse
 import com.tmdb.movieapp.data.local.MovieListResponse
 import com.tmdb.movieapp.data.remote.MovieApi
 import com.tmdb.movieapp.domain.MovieRepository
@@ -14,6 +15,13 @@ class MovieRepositoryImpl @Inject constructor(
         page: Int
     ): MovieListResponse {
         return api.getMovies(apiKey = apiKey, query = query, page = page)
+    }
+
+    override suspend fun getMovieById(
+        apiKey: String,
+        movieId: Int
+    ): MovieDetailsResponse {
+        return api.getMovieById(apiKey = apiKey, movieId = movieId)
     }
 
 }
