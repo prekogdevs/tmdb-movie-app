@@ -13,8 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
+import com.tmdb.movieapp.ComponentTags
 import com.tmdb.movieapp.R
 import com.tmdb.movieapp.presentation.navigation.Screen
 
@@ -30,6 +32,7 @@ fun AppScaffold(
         topBar = {
             if (shouldShowBackArrow(backStackEntry = backStackEntry)) {
                 TitledTopBar(
+                    modifier = Modifier.testTag(ComponentTags.DETAILS_SCREEN_TOP_BAR),
                     title = { Text(text = title, color = Color.White) },
                     navigationIcon = {
                         IconButton(onClick = {
@@ -46,6 +49,7 @@ fun AppScaffold(
                 )
             } else {
                 StandardTopBar(
+                    modifier = Modifier.testTag(ComponentTags.HOME_SCREEN_TOP_BAR),
                     title = { Text(text = title, color = Color.White) },
                 )
             }

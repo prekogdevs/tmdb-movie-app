@@ -1,4 +1,4 @@
-package com.tmb.tmdbmovieapp
+package com.tmb.movieapp
 
 import android.app.Application
 import android.content.Context

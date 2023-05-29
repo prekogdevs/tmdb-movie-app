@@ -15,12 +15,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.tmdb.movieapp.ComponentTags
 import com.tmdb.movieapp.R
 import com.tmdb.movieapp.ui.theme.primaryColor
 
@@ -56,6 +58,7 @@ fun HomeScreen(
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
+                    modifier = Modifier.testTag(ComponentTags.SEARCH_RESULT_PLACEHOLDER),
                     text = stringResource(R.string.txtSearchResultsLabel),
                     fontWeight = FontWeight.Bold
                 )
@@ -74,6 +77,7 @@ fun HomeScreen(
 
                 is LoadState.NotLoading -> {
                     LazyColumn(
+                        modifier = Modifier.testTag(ComponentTags.SEARCH_RESULTS),
                         verticalArrangement = Arrangement.spacedBy(24.dp),
                         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
                     ) {

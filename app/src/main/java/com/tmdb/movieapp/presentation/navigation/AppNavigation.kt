@@ -13,11 +13,12 @@ import com.tmdb.movieapp.presentation.home.HomeScreen
 @Composable
 fun AppNavigation(
     navController: NavHostController,
-    paddingValues: PaddingValues
+    paddingValues: PaddingValues,
+    startDestination: String = Screen.HomeScreen.route
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.HomeScreen.route
+        startDestination = startDestination
     ) {
         composable(route = Screen.HomeScreen.route) {
             HomeScreen(
