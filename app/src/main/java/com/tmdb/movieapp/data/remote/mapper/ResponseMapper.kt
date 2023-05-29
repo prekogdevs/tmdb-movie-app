@@ -25,4 +25,4 @@ fun MovieDetailsResponse.toDetailedMovie() = DetailedMovie(
     posterURL = poster_path?.toPosterURL()
 )
 
-fun String?.toPosterURL() = AppConstants.IMAGE_PATH + this
+fun String?.toPosterURL() = if (this == null) null else AppConstants.IMAGE_PATH + this
