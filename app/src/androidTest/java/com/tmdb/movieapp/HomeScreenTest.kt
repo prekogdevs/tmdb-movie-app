@@ -1,4 +1,4 @@
-package com.tmb.movieapp
+package com.tmdb.movieapp
 
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.getValue
@@ -7,7 +7,6 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.tmdb.movieapp.ComponentTags
 import com.tmdb.movieapp.presentation.MainActivity
 import com.tmdb.movieapp.presentation.navigation.AppNavigation
 import com.tmdb.movieapp.presentation.scaffold.AppScaffold
@@ -27,7 +26,7 @@ class HomeScreenTest {
     val composeRule = createAndroidComposeRule<MainActivity>()
 
     @Before
-    fun setUp() {
+    fun setup() {
         hiltRule.inject()
         composeRule.activity.setContent {
             val navController = rememberNavController()

@@ -1,7 +1,6 @@
-package com.tmb.movieapp
+package com.tmdb.movieapp
 
 import com.google.common.truth.Truth.assertThat
-import com.tmdb.movieapp.AppConstants
 import com.tmdb.movieapp.data.remote.mapper.toDetailedMovie
 import com.tmdb.movieapp.data.remote.mapper.toPosterURL
 import com.tmdb.movieapp.data.remote.mapper.toSimplifiedMovie

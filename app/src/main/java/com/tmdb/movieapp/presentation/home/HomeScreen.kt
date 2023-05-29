@@ -28,6 +28,7 @@ import com.tmdb.movieapp.ui.theme.primaryColor
 
 @Composable
 fun HomeScreen(
+    modifier: Modifier = Modifier,
     paddingValues: PaddingValues,
     homeViewModel: HomeViewModel = hiltViewModel(),
     onMovieItemClick: (Int) -> Unit
@@ -36,7 +37,7 @@ fun HomeScreen(
     val movies = homeViewModel.moviePager.collectAsLazyPagingItems()
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(
                 top = paddingValues.calculateTopPadding(),

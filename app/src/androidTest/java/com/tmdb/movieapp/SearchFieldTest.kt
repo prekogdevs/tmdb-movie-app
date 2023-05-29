@@ -1,4 +1,4 @@
-package com.tmb.movieapp
+package com.tmdb.movieapp
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -8,7 +8,6 @@ import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performTextInput
-import com.tmdb.movieapp.ComponentTags
 import com.tmdb.movieapp.presentation.home.SearchField
 import org.junit.Rule
 import org.junit.Test

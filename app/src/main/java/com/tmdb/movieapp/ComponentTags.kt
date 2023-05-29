@@ -6,4 +6,6 @@ object ComponentTags {
     const val HOME_SCREEN_TOP_BAR = "HomeScreenTopBar"
     const val DETAILS_SCREEN_TOP_BAR = "DetailsScreenTopBar"
     const val SEARCH_RESULTS = "SearchResultsLazyColumn"
+    const val HOME_SCREEN = "HomeScreen"
+    const val DETAILS_SCREEN = "DetailsScreen"
 }
