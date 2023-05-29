@@ -19,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.tmdb.movieapp.R
 import com.tmdb.movieapp.ui.theme.primaryColor
@@ -30,7 +31,6 @@ fun HomeScreen(
     onMovieItemClick: (Int) -> Unit
 ) {
     val query by homeViewModel.query.collectAsState()
-    val isSearching by homeViewModel.isSearching.collectAsState()
     val movies = homeViewModel.moviePager.collectAsLazyPagingItems()
 
     Column(
@@ -49,15 +49,7 @@ fun HomeScreen(
                 homeViewModel.onQueryChanged(query = query)
             }
         )
-        if (isSearching) {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                CircularProgressIndicator()
-            }
-        } else if (movies.itemCount == 0) {
+        if (movies.itemCount == 0) {
             Column(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -69,19 +61,46 @@ fun HomeScreen(
                 )
             }
         } else {
-            LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(24.dp),
-                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
-            ) {
-                items(movies.itemCount) { index ->
-                    val movie = movies[index]
-                    movie?.let {
-                        MovieItem(
-                            modifier = Modifier.fillMaxWidth(),
-                            simplifiedMovie = movie,
-                            onMovieItemClick = {
-                                onMovieItemClick(movie.id)
+            when (movies.loadState.refresh) {
+                is LoadState.Loading -> {
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        CircularProgressIndicator()
+                    }
+                }
+
+                is LoadState.NotLoading -> {
+                    LazyColumn(
+                        verticalArrangement = Arrangement.spacedBy(24.dp),
+                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+                    ) {
+                        items(movies.itemCount) { index ->
+                            val movie = movies[index]
+                            movie?.let {
+                                MovieItem(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    simplifiedMovie = movie,
+                                    onMovieItemClick = {
+                                        onMovieItemClick(movie.id)
+                                    }
+                                )
                             }
+                        }
+                    }
+                }
+
+                is LoadState.Error -> {
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Text(
+                            text = stringResource(R.string.txtError),
+                            fontWeight = FontWeight.Bold
                         )
                     }
                 }
