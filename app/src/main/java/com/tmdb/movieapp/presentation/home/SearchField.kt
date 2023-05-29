@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import com.tmdb.movieapp.R
@@ -21,7 +22,7 @@ fun SearchField(
     onValueChange: (String) -> Unit
 ) {
     TextField(
-        modifier = modifier,
+        modifier = modifier.testTag("SearchField"),
         value = value,
         onValueChange = onValueChange,
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
