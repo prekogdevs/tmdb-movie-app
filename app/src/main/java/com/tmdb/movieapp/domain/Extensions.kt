@@ -3,7 +3,7 @@ package com.tmdb.movieapp.domain
 import java.text.NumberFormat
 import java.util.Currency
 
-fun Int.formatToUSD(): String {
+fun Number.formatToUSD(): String {
     val numberFormat: NumberFormat = NumberFormat.getCurrencyInstance()
     numberFormat.maximumFractionDigits = 0
     numberFormat.currency = Currency.getInstance("USD")
